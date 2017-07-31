@@ -1,1 +1,2 @@
-This is a Goal Coach project. 
+This is a Goal Coach project.
+One more line. 
