@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { firebaseApp } from '../firebase';
-import { withRouter } from 'react-router-dom';
+//import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux'; 
+import {logUser} from '../actions'; 
 
 class App extends Component {
 
@@ -10,12 +12,13 @@ class App extends Component {
 
         firebaseApp.auth().onAuthStateChanged(user => {
             if (user) {
-                console.log('user has signed in or up ', user);
                 this.props.history.push('/app');
+                const { email }  = user; 
+                this.props.logUser(email); 
 
             }
             else {
-                console.log('user has signed out or still needs to sign in.');
+
                 this.props.history.push('/signin');
             }
 
@@ -28,6 +31,9 @@ class App extends Component {
     render() {
         return (
             <div>
+                <h3> Goals </h3> 
+                <div> Add goal  </div> 
+                <div> Goal list</div> 
                 <button
                     className="btn btn-danger"
                     onClick={() => this.signOut()}
@@ -39,4 +45,9 @@ class App extends Component {
     }
 }
 
-export default withRouter(App); 
+function mapStatetoProps(state) {
+    console.log('state', state); 
+    return {}; 
+}
+
+export default connect(mapStatetoProps, {logUser})(App); 
