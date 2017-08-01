@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { firebaseApp } from '../firebase';
-//import { withRouter } from 'react-router-dom';
+import AddGoal from './AddGoal'; 
 import {connect} from 'react-redux'; 
 import {logUser} from '../actions'; 
 
@@ -32,7 +32,7 @@ class App extends Component {
         return (
             <div>
                 <h3> Goals </h3> 
-                <div> Add goal  </div> 
+                <AddGoal /> 
                 <div> Goal list</div> 
                 <button
                     className="btn btn-danger"
