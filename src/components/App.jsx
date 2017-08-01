@@ -1,12 +1,42 @@
-import React, {Component} from 'react'; 
+import React, { Component } from 'react';
+import { firebaseApp } from '../firebase';
+import { withRouter } from 'react-router-dom';
 
 class App extends Component {
 
-    render() { 
+    constructor(props) {
+        super(props);
+
+
+        firebaseApp.auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log('user has signed in or up ', user);
+                this.props.history.push('/app');
+
+            }
+            else {
+                console.log('user has signed out or still needs to sign in.');
+                this.props.history.push('/signin');
+            }
+
+        })
+    }
+    signOut() {
+        firebaseApp.auth().signOut();
+        this.props.history.push('/signin');
+    }
+    render() {
         return (
-            <div>Pieniądze to nie wszystko, chociaż wszystko bez nich to chuj.</div> 
+            <div>
+                <button
+                    className="btn btn-danger"
+                    onClick={() => this.signOut()}
+                >
+                    Sign out
+                </button>
+            </div>
         )
     }
 }
 
-export default App; 
+export default withRouter(App); 
