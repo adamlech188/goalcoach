@@ -3,6 +3,7 @@ import { firebaseApp } from '../firebase';
 import AddGoal from './AddGoal'; 
 import {connect} from 'react-redux'; 
 import {logUser} from '../actions'; 
+import GoalList from './GoalList'; 
 
 class App extends Component {
 
@@ -33,7 +34,7 @@ class App extends Component {
             <div>
                 <h3> Goals </h3> 
                 <AddGoal /> 
-                <div> Goal list</div> 
+               <GoalList /> 
                 <button
                     className="btn btn-danger"
                     onClick={() => this.signOut()}
